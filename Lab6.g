@@ -79,6 +79,7 @@ top : full_expression
 full_expression : func full_expression
                 | expr op full_expression
                 | expr
+                | ;
 
 
 expr : DECIMAL
