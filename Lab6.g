@@ -4,6 +4,17 @@ grammar Lab6;
 
 // Define literals, keywords or operators, here as tokens.
 tokens {
+    PLUS = '+';
+    MINUS = '-';
+    MULT = '*';
+    DIV = '/';
+    EXPONENT = '^';
+    OPENPAR = '(';
+    CLOSEPAR = ')';
+    LOG = 'log';
+    SINE = 'sin';
+    COSINE = 'cos';
+    TANGENT = 'tan';
 }
 
 // Written in the target language. The header section can be
@@ -41,6 +52,62 @@ WS : (' ' | '\t' | '\r' | '\n')+ { $channel=HIDDEN; };
 // The decimal value lexer rule. Match one or more decimal digits.
 DECIMAL : DEC+ ;
 
+// The binary value lexer rule. Match one or more decimal digits.
+BINARY : BIN+ ;
+
+// The octal value lexer rule. Match one or more octal digits.
+OCTAL : OCT+ ;
+
+// The hexadecimal value lexer rule. Match one or more hexadecimal digits.
+HEXADECIMAL: HEX+ ;
+
+op : PLUS
+   | MINUS
+   | MULT
+   | DIV 
+   | EXPONENT;
+
+func : LOG
+     | SINE
+     | COSINE
+     | TANGENT ;
+
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
-top : expr '+' expr ;
+top : full_expression
+
+full_expression : func full_expression
+                | expr op full_expression
+                | expr
+
+
+expr : DECIMAL
+     | BINARY
+     | OCTAL
+     | HEXADECIMAL ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
