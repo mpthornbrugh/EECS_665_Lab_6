@@ -61,32 +61,17 @@ OCTAL : OCT+ ;
 // The hexadecimal value lexer rule. Match one or more hexadecimal digits.
 HEXADECIMAL: HEX+ ;
 
-op : PLUS
-   | MINUS
-   | MULT
-   | DIV 
-   | EXPONENT;
-
-func : LOG
-     | SINE
-     | COSINE
-     | TANGENT ;
-
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
-top : full_expression
+top : full_expression EOF
+    | EOF
+    ;
 
-full_expression : func full_expression
-                | expr op full_expression
-                | expr
-                | ;
+expr : term { System.out.println( $term.value ); } ;
 
+term returns [int value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* ;
 
-expr : DECIMAL
-     | BINARY
-     | OCTAL
-     | HEXADECIMAL ;
-
+digit returns [int value] : INTEGER { $value = Integer.parseInt( $INTEGER.getText(), 10 ); } ;
 
 
 
