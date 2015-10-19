@@ -56,7 +56,7 @@ INT : DEC+ ;
 DECIMAL : DEC+'.'DEC+ ;
 
 // The binary value lexer rule. Match one or more decimal digits.
-//BINARY : BIN+ ;
+BINARY : '0b'BIN+ ;
 
 // The octal value lexer rule. Match one or more octal digits.
 //OCTAL : OCT+ ;
@@ -124,8 +124,9 @@ logExpr returns [float value]
 	;
 	
 digit returns [float value] 
-	: INT { $value = Integer.parseInt( $INT.getText() ); }
-	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText() ); }
+	: INT { $value = Integer.parseInt( $INT.getText(), 10); }
+	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText(), 10); }
+	| BINARY { $value = Integer.parseInt( $BINARY.getText(), 2); }
 	;
 
 
