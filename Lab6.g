@@ -67,10 +67,11 @@ top : expr EOF
     | EOF
     ;
 
-expr : term { System.out.println( $term.value ); } ;
+expr : addExpr { System.out.println( $addExpr.value ); } ;
 
-term returns [float value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* 
-                           | l = digit { $value = $l.value; } ( MINUS r = digit { $value -= $r.value; } )* ;
+addExpr returns [float value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* ;
+						   
+subExpr return [float value] : l = digit { $value = $l.value; } ( MINUS r = digit { $value -= $r.value; } )* ;
 
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
