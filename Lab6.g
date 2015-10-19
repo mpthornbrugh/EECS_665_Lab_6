@@ -79,26 +79,30 @@ expr
 	| cosExpr { System.out.println( $cosExpr.value ); }
 	| tanExpr { System.out.println( $tanExpr.value ); }
 	| logExpr { System.out.println( $logExpr.value ); }
+	| multiExpr { System.out.println( $multiExpr.value ); }
 	;
+	
+multiExpr returns [float value]
+	: l = digit ;
 
 addExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( PLUS r = digit { $value += $r.value; } ) 
+		( PLUS r = digit { $value += $r.value; } )* 
 	;
 						   
 subExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( MINUS r = digit { $value -= $r.value; } )
+		( MINUS r = digit { $value -= $r.value; } )*
 	;
 
 mulExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( MULT r = digit { $value *= $r.value; } )
+		( MULT r = digit { $value *= $r.value; } )*
 	;
 	
 divExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( DIV r = digit { $value /= $r.value; } )
+		( DIV r = digit { $value /= $r.value; } )*
 	;
 	
 expExpr returns [float value] 
