@@ -76,6 +76,8 @@ expr
 	| divExpr { System.out.println( $divExpr.value ); }
 	| expExpr { System.out.println( $expExpr.value ); }
 	| sinExpr { System.out.println( $sinExpr.value ); }
+	| cosExpr { System.out.println( $cosExpr.value ); }
+	| tanExpr { System.out.println( $tanExpr.value ); }
 	;
 
 addExpr returns [float value] 
@@ -105,6 +107,14 @@ expExpr returns [float value]
 	
 sinExpr returns [float value] 
 	: SINE r = digit { $value = (float)(Math.sin((float)$r.value)); }
+	;
+	
+cosExpr returns [float value] 
+	: COSINE r = digit { $value = (float)(Math.cos((float)$r.value)); }
+	;
+
+tanExpr returns [float value] 
+	: TANGENT r = digit { $value = (float)(Math.tan((float)$r.value)); }
 	;
 	
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
