@@ -70,8 +70,6 @@ top : expr EOF
 expr : addExpr { System.out.println( $addExpr.value ); } ;
 
 addExpr returns [float value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* ;
-						   
-subExpr returns [float value] : l = digit { $value = $l.value; } ( MINUS r = digit { $value -= $r.value; } )* ;
 
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
