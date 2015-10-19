@@ -67,7 +67,10 @@ top : expr EOF
     | EOF
     ;
 
-expr : addExpr { System.out.println( $addExpr.value ); } ;
+expr 
+	: addExpr { System.out.println( $addExpr.value ); } 
+	| subExpr { System.out.println( $subExpr.value ); }
+	;
 
 addExpr returns [float value] 
 	: l = digit { $value = $l.value; }
