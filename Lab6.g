@@ -67,6 +67,7 @@ HEXADECIMAL: '0x'HEX+ ;
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
 top : expr EOF
+	| OPENPAR expr CLOSEPAR EOF
     | EOF
     ;
 
