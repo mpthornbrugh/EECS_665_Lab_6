@@ -52,7 +52,7 @@ fragment HEX: ('0' .. '9' | 'A' .. 'F' | 'a' .. 'f');
 WS : (' ' | '\t' | '\r' | '\n')+ { $channel=HIDDEN; };
 
 // The decimal value lexer rule. Match one or more decimal digits.
-DECIMAL : '0' .. '9'+ ;
+DECIMAL : DEC+ ;
 
 // The binary value lexer rule. Match one or more decimal digits.
 //BINARY : BIN+ ;
@@ -87,22 +87,22 @@ multiExpr returns [float value]
 
 addExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		(options{greedy:true;}: PLUS r = digit { $value += $r.value; } )* 
+		( PLUS r = digit { $value += $r.value; } ) 
 	;
 						   
 subExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		(options{greedy:true;}: MINUS r = digit { $value -= $r.value; } )*
+		( MINUS r = digit { $value -= $r.value; } )
 	;
 
 mulExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		(options{greedy:true;}: MULT r = digit { $value *= $r.value; } )*
+		( MULT r = digit { $value *= $r.value; } )
 	;
 	
 divExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		(options{greedy:true;}: DIV r = digit { $value /= $r.value; } )*
+		( DIV r = digit { $value /= $r.value; } )
 	;
 	
 expExpr returns [float value] 
@@ -126,7 +126,7 @@ logExpr returns [float value]
 	: LOG r = digit { $value = (float)(Math.log((float)$r.value)); }
 	;
 	
-digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText()); } ;
+digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
 
 
