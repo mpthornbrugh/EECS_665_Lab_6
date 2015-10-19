@@ -62,7 +62,7 @@ BINARY : '0b'BIN+ ;
 //OCTAL : OCT+ ;
 
 // The hexadecimal value lexer rule. Match one or more hexadecimal digits.
-//HEXADECIMAL: HEX+ ;
+HEXADECIMAL: '0x'HEX+ ;
 
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
@@ -127,6 +127,7 @@ digit returns [float value]
 	: INT { $value = Integer.parseInt( $INT.getText(), 10); }
 	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText()); }
 	| BINARY { $value = Integer.parseInt( $BINARY.getText().substring(2), 2); }
+	| HEXADECIMAL { $value = Integer.parseInt( $HEXADECIMAL.getText().substring(2), 2); }
 	;
 
 
