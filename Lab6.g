@@ -75,6 +75,7 @@ expr
 	| mulExpr { System.out.println( $mulExpr.value ); }
 	| divExpr { System.out.println( $divExpr.value ); }
 	| expExpr { System.out.println( $expExpr.value ); }
+	| sinExpr { System.out.println( $sinExpr.value ); }
 	;
 
 addExpr returns [float value] 
@@ -100,6 +101,10 @@ divExpr returns [float value]
 expExpr returns [float value] 
 	: l = digit { $value = $l.value; }
 		( EXPONENT r = digit { $value = (float)(Math.pow((float)$value, (float)$r.value)); } )
+	;
+	
+sinExpr returns [float value] 
+	: SINE r = digit { $value = (float)(Math.sin((float)$r.value)); }
 	;
 	
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
