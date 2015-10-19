@@ -71,7 +71,7 @@ expr : term { System.out.println( $term.value ); } ;
 
 term returns [int value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* ;
 
-digit returns [int value] : INTEGER { $value = Integer.parseInt( $INTEGER.getText(), 10 ); } ;
+digit returns [int value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
 
 
