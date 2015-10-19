@@ -55,13 +55,13 @@ WS : (' ' | '\t' | '\r' | '\n')+ { $channel=HIDDEN; };
 DECIMAL : DEC+ ;
 
 // The binary value lexer rule. Match one or more decimal digits.
-//BINARY : BIN+ ;
+BINARY : BIN+ ;
 
 // The octal value lexer rule. Match one or more octal digits.
-//OCTAL : OCT+ ;
+OCTAL : OCT+ ;
 
 // The hexadecimal value lexer rule. Match one or more hexadecimal digits.
-//HEXADECIMAL: HEX+ ;
+HEXADECIMAL: HEX+ ;
 
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
@@ -122,7 +122,10 @@ logExpr returns [float value]
 	: LOG r = digit { $value = (float)(Math.log((float)$r.value)); }
 	;
 	
-digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText() ); } ;
+digit returns [float value] 
+	: DECIMAL { $value = Integer.parseInt( $DECIMAL.getText() ); }
+	| BINARY  { $value = Integer.parseInt( $BINARY.getText() ); }
+	;
 
 
 
