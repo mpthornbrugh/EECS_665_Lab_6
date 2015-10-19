@@ -63,7 +63,7 @@ HEXADECIMAL: HEX+ ;
 
 // The top rule. You should replace this with your own rule definition to
 // parse expressions according to the assignment.
-top : full_expression EOF
+top : expr EOF
     | EOF
     ;
 
