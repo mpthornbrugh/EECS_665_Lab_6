@@ -20,6 +20,8 @@ tokens {
 // Written in the target language. The header section can be
 // used to import any Java classes that may be required.
 @header {
+	import java.lang.Math;
+	import java.io.*;
 }
 
 // A main function to the parser. This function will setup the
@@ -70,6 +72,9 @@ top : expr EOF
 expr 
 	: addExpr { System.out.println( $addExpr.value ); } 
 	| subExpr { System.out.println( $subExpr.value ); }
+	| mulExpr { System.out.println( $mulExpr.value ); }
+	| divExpr { System.out.println( $divExpr.value ); }
+	| expExpr { System.out.println( $expExpr.value ); }
 	;
 
 addExpr returns [float value] 
@@ -82,6 +87,21 @@ subExpr returns [float value]
 		( MINUS r = digit { $value -= $r.value; } )
 	;
 
+mulExpr returns [float value] 
+	: l = digit { $value = $l.value; }
+		( MULT r = digit { $value *= $r.value; } )
+	;
+	
+divExpr returns [float value] 
+	: l = digit { $value = $l.value; }
+		( DIV r = digit { $value /= $r.value; } )
+	;
+	
+expExpr returns [float value] 
+	: l = digit { $value = $l.value; }
+		( EXPONENT r = digit { Math.pow((float)$value, (float)$r.value); } )
+	;
+	
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
 
