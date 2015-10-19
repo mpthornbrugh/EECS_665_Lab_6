@@ -52,7 +52,7 @@ fragment HEX: ('0' .. '9' | 'A' .. 'F' | 'a' .. 'f');
 WS : (' ' | '\t' | '\r' | '\n')+ { $channel=HIDDEN; };
 
 // The decimal value lexer rule. Match one or more decimal digits.
-DECIMAL : DEC+ ;
+DECIMAL : '0' .. '9'+ ;
 
 // The binary value lexer rule. Match one or more decimal digits.
 //BINARY : BIN+ ;
