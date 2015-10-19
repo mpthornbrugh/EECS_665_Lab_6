@@ -87,7 +87,7 @@ multiExpr returns [float value]
 
 addExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( PLUS r = digit { $value += $r.value; } )* 
+		(options{greedy:true;}: PLUS r = digit { $value += $r.value; } )* 
 	;
 						   
 subExpr returns [float value] 
