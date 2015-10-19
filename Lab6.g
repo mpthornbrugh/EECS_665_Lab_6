@@ -99,7 +99,7 @@ divExpr returns [float value]
 	
 expExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( EXPONENT r = digit { Math.pow((float)$value, (float)$r.value); } )
+		( EXPONENT r = digit { Math.pow((double)$value, (double)$r.value); } )
 	;
 	
 digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
