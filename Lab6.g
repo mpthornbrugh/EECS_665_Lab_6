@@ -52,7 +52,8 @@ fragment HEX: ('0' .. '9' | 'A' .. 'F' | 'a' .. 'f');
 WS : (' ' | '\t' | '\r' | '\n')+ { $channel=HIDDEN; };
 
 // The decimal value lexer rule. Match one or more decimal digits.
-DECIMAL : DEC+ ;
+INT : DEC+ ;
+DECIMAL : DEC+'.'DEC+ ;
 
 // The binary value lexer rule. Match one or more decimal digits.
 //BINARY : BIN+ ;
@@ -123,7 +124,8 @@ logExpr returns [float value]
 	;
 	
 digit returns [float value] 
-	: DECIMAL { $value = Integer.parseInt( $DECIMAL.getText() ); }
+	: INT { $value = Integer.parseInt( $INT.getText() ); }
+	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText() ); }
 	;
 
 
