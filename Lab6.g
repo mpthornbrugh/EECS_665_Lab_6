@@ -125,7 +125,7 @@ logExpr returns [float value]
 	
 digit returns [float value] 
 	: INT { $value = Integer.parseInt( $INT.getText(), 10); }
-	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText(), 10); }
+	| DECIMAL { $value = Float.parseFloat( $DECIMAL.getText()); }
 	| BINARY { $value = Integer.parseInt( $BINARY.getText(), 2); }
 	;
 
