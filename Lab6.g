@@ -69,9 +69,10 @@ top : expr EOF
 
 expr : term { System.out.println( $term.value ); } ;
 
-term returns [int value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* ;
+term returns [float value] : l = digit { $value = $l.value; } ( PLUS r = digit { $value += $r.value; } )* 
+                           | l = digit { $value = $l.value; } ( MINUS r = digit { $value -= $r.value; } )* ;
 
-digit returns [int value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
+digit returns [float value] : DECIMAL { $value = Integer.parseInt( $DECIMAL.getText(), 10 ); } ;
 
 
 
