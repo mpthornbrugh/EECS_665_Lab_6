@@ -80,7 +80,7 @@ expr
 	| tanExpr { System.out.println( $tanExpr.value ); }
 	| logExpr { System.out.println( $logExpr.value ); }
 	;
-
+	
 addExpr returns [float value] 
 	: l = digit { $value = $l.value; }
 		( PLUS r = digit { $value += $r.value; } ) 
@@ -124,7 +124,6 @@ logExpr returns [float value]
 	
 digit returns [float value] 
 	: DECIMAL { $value = Integer.parseInt( $DECIMAL.getText() ); }
-	| BINARY  { $value = Integer.parseInt( $BINARY.getText() ); }
 	;
 
 
