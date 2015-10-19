@@ -92,17 +92,17 @@ addExpr returns [float value]
 						   
 subExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( MINUS r = digit { $value -= $r.value; } )*
+		(options{greedy:true;}: MINUS r = digit { $value -= $r.value; } )*
 	;
 
 mulExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( MULT r = digit { $value *= $r.value; } )*
+		(options{greedy:true;}: MULT r = digit { $value *= $r.value; } )*
 	;
 	
 divExpr returns [float value] 
 	: l = digit { $value = $l.value; }
-		( DIV r = digit { $value /= $r.value; } )*
+		(options{greedy:true;}: DIV r = digit { $value /= $r.value; } )*
 	;
 	
 expExpr returns [float value] 
